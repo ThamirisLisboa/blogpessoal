@@ -6,11 +6,17 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.ManyToAny;
+import org.springframework.web.bind.annotation.GetMapping;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Table(name = "Postagens")
@@ -26,7 +32,19 @@ public class Postagem {
 	  @NotNull
 	  @Size(min= 100, max = 500)
 	private String texto;
- 
+     @ManyToOne
+     @JsonIgnoreProperties("postagem")
+//     private Tema tema; 
+     
+     
+//	public Tema getTema() {
+		//return tema;
+	//}
+
+	//public void setTema(Tema tema) {
+		//this.tema = tema;
+	}
+
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date data = new java.sql.Date(System.currentTimeMillis());
 	
@@ -62,5 +80,6 @@ public class Postagem {
 		this.data = data;
 	}
 	 
+
  
 }
